@@ -20,14 +20,12 @@ public class Main {
 	 * @return the {@link string_code}
 	 */
 	static string_code hashit(String inString) {
-		if (inString.equals("tragedy")) {
+		if (inString.equals("tragedy"))
 			return string_code.tragedy;
-		}
-		if (inString.equals("comedy")) {
+		else if (inString.equals("comedy"))
 			return string_code.comedy;
-		} else {
+		else
 			return string_code.none;
-		}
 	}
 
 	static String statement(JsonArray invoices, JsonObject plays) {
@@ -42,12 +40,14 @@ public class Main {
 		int thisAmount = 0;
 		JsonObject play;
 
-		for (int index = 0; index < performances.size(); ++index) {
-			play = plays.get(performances.get(index).getAsJsonObject().get("playID").getAsString())
+		for (int i = 0; i < performances.size(); ++i) {
+			play = plays.get(performances.get(i).getAsJsonObject().get("playID").getAsString())
 					.getAsJsonObject();
-			int audience = performances.get(index).getAsJsonObject().get("audience").getAsInt();
+			int audience = performances.get(i).getAsJsonObject().get("audience").getAsInt();
 
-			switch (hashit(play.get("type").getAsString())) {
+			string_code type = hashit(play.get("type").getAsString());
+
+			switch (type) {
 				case tragedy:
 					thisAmount = 40000;
 					if (audience > 30) {
