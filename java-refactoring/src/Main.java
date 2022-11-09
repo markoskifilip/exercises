@@ -66,16 +66,21 @@ public class Main {
 			volumeCredits += Math.max(audience - 30, 0);
 
 			// add extra credit for every ten comedy attendees
-			if (play.get("type").getAsString() == "comedy")
+			if (play.get("type").getAsString().equals("comedy"))
 				volumeCredits += Math.floor(audience / 5);
 
 			// print line for this order
-			result += " " + play.get("name").getAsString() + ": $" + (thisAmount / 100) + "(" + audience + " seats)\n";
+			String nameOfPlay = play.get("name").getAsString();
+			float amountPerPlay = thisAmount / 100;
+
+			result += String.format("    %s: $%.2f (%d seats)\n", nameOfPlay, amountPerPlay, audience);
 			totalAmount += thisAmount;
 		}
 
-		result += "Amount owed is $" + (totalAmount / 100) + "\n";
-		result += "You earned " + volumeCredits + " credits\n";
+		float amountOwed = totalAmount / 100;
+
+		result += String.format("  Amount owed is $%,.2f\n", amountOwed);
+		result += String.format("  You earned %d credits\n", volumeCredits);
 		return result;
 	}
 
