@@ -34,8 +34,10 @@ public class Main {
 
 		int totalAmount = 0;
 		int volumeCredits = 0;
+		StringBuilder resultSb = new StringBuilder();
+		String getCustomerName = invoices.get(0).getAsJsonObject().get("customer").getAsString();
 
-		String result = "Statement for " + invoices.get(0).getAsJsonObject().get("customer").getAsString() + " \n";
+		resultSb.append("Statement for " + getCustomerName + " \n");
 		JsonArray performances = invoices.get(0).getAsJsonObject().get("performances").getAsJsonArray();
 
 		for (int index = 0; index < performances.size(); ++index) {
@@ -73,15 +75,16 @@ public class Main {
 			String nameOfPlay = play.get("name").getAsString();
 			float amountPerPlay = thisAmount / 100;
 
-			result += String.format("    %s: $%.2f (%d seats)\n", nameOfPlay, amountPerPlay, audience);
+			resultSb.append(String.format("    %s: $%.2f (%d seats)\n", nameOfPlay, amountPerPlay, audience));
 			totalAmount += thisAmount;
 		}
 
 		float amountOwed = totalAmount / 100;
 
-		result += String.format("  Amount owed is $%,.2f\n", amountOwed);
-		result += String.format("  You earned %d credits\n", volumeCredits);
-		return result;
+		resultSb.append(String.format("  Amount owed is $%,.2f\n", amountOwed));
+		resultSb.append(String.format("  You earned %d credits\n", volumeCredits));
+
+		return resultSb.toString();
 	}
 
 	public static void main(String[] args) throws Exception {
