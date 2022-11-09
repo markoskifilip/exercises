@@ -39,10 +39,11 @@ public class Main {
 
 		resultSb.append("Statement for " + getCustomerName + " \n");
 		JsonArray performances = invoices.get(0).getAsJsonObject().get("performances").getAsJsonArray();
+		int thisAmount = 0;
+		JsonObject play;
 
 		for (int index = 0; index < performances.size(); ++index) {
-			int thisAmount = 0;
-			JsonObject play = plays.get(performances.get(index).getAsJsonObject().get("playID").getAsString())
+			play = plays.get(performances.get(index).getAsJsonObject().get("playID").getAsString())
 					.getAsJsonObject();
 			int audience = performances.get(index).getAsJsonObject().get("audience").getAsInt();
 
