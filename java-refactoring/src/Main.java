@@ -41,8 +41,7 @@ public class Main {
 		JsonObject play;
 
 		for (int i = 0; i < performances.size(); ++i) {
-			play = plays.get(performances.get(i).getAsJsonObject().get("playID").getAsString())
-					.getAsJsonObject();
+			play = plays.get(performances.get(i).getAsJsonObject().get("playID").getAsString()).getAsJsonObject();
 			int audience = performances.get(i).getAsJsonObject().get("audience").getAsInt();
 
 			string_code type = hashit(play.get("type").getAsString());
