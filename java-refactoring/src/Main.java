@@ -35,7 +35,7 @@ public class Main {
 		StringBuilder resultSb = new StringBuilder();
 		String getCustomerName = invoices.get(0).getAsJsonObject().get("customer").getAsString();
 
-		resultSb.append("Statement for " + getCustomerName + " \n");
+		resultSb.append(String.format("Statement for %s \n", getCustomerName));
 		JsonArray performances = invoices.get(0).getAsJsonObject().get("performances").getAsJsonArray();
 		int thisAmount = 0;
 		JsonObject play;
